@@ -7,15 +7,15 @@
 # General application configuration
 use Mix.Config
 
-config :appnamehere,
-  ecto_repos: [Appnamehere.Repo]
+config :ipsum,
+  ecto_repos: [Ipsum.Repo]
 
 # Configures the endpoint
-config :appnamehere, AppnamehereWeb.Endpoint,
+config :ipsum, IpsumWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "QEfLM5g6RWqOTOpO08UozwwrDqCRpxiblKn7TDM4TDvspWRHQoKptUPrqIHOWU/E",
-  render_errors: [view: AppnamehereWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Appnamehere.PubSub, adapter: Phoenix.PubSub.PG2],
+  render_errors: [view: IpsumWeb.ErrorView, accepts: ~w(html json)],
+  pubsub: [name: Ipsum.PubSub, adapter: Phoenix.PubSub.PG2],
   live_view: [signing_salt: "8OeZc0Gk"]
 
 # Configures Elixir's Logger

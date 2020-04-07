@@ -1,4 +1,4 @@
-defmodule AppnamehereWeb.ChannelCase do
+defmodule IpsumWeb.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -11,7 +11,7 @@ defmodule AppnamehereWeb.ChannelCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use AppnamehereWeb.ChannelCase, async: true`, although
+  by setting `use IpsumWeb.ChannelCase, async: true`, although
   this option is not recommended for other databases.
   """
 
@@ -23,15 +23,15 @@ defmodule AppnamehereWeb.ChannelCase do
       use Phoenix.ChannelTest
 
       # The default endpoint for testing
-      @endpoint AppnamehereWeb.Endpoint
+      @endpoint IpsumWeb.Endpoint
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Appnamehere.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Ipsum.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Appnamehere.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(Ipsum.Repo, {:shared, self()})
     end
 
     :ok

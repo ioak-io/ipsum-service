@@ -1,7 +1,7 @@
 use Mix.Config
 
 # Configure your database
-config :appnamehere, Appnamehere.Repo,
+config :ipsum, Ipsum.Repo,
   url: "postgres://rqxejfpn:Z42RFitI4sXdNEOXV8mbndB-vUVB_7m4@drona.db.elephantsql.com:5432/rqxejfpn",
   show_sensitive_data_on_connection_error: true,
   pool_size: 2
@@ -12,7 +12,7 @@ config :appnamehere, Appnamehere.Repo,
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
-config :appnamehere, AppnamehereWeb.Endpoint,
+config :ipsum, IpsumWeb.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
@@ -52,13 +52,13 @@ config :appnamehere, AppnamehereWeb.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :appnamehere, AppnamehereWeb.Endpoint,
+config :ipsum, IpsumWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
-      ~r"lib/appnamehere_web/(live|views)/.*(ex)$",
-      ~r"lib/appnamehere_web/templates/.*(eex)$"
+      ~r"lib/ipsum_web/(live|views)/.*(ex)$",
+      ~r"lib/ipsum_web/templates/.*(eex)$"
     ]
   ]
 
