@@ -19,6 +19,10 @@ defmodule IpsumWeb.Router do
 
     get "/blog/post", PostController, :index
 
+    post "/text/corpus", TextController, :get_corpus
     get "/text/generate/:language/:type", TextController, :generate
+    resources "/domain", DomainController
+    get "/verb/:id", VerbController, :get
+    post "/flatten", FlattenController, :flatten
   end
 end
