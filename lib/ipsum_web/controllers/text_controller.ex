@@ -16,8 +16,11 @@ defmodule IpsumWeb.TextController do
 
     def get_int_from_query(query_params, default_value) do
         if Map.has_key?(query_params, "count") do
-            {count, _} = Integer.parse(query_params["count"])
-            count
+            case Integer.parse(query_params["count"]) do
+                {count, _} -> count
+                {_, _} -> default_value
+                _ -> default_value
+            end
         else
             default_value
         end
