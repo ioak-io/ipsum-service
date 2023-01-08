@@ -20,7 +20,7 @@
     "bcrypt": "^5.1.0",
     "crypto-js": "^4.0.0",
     "date-fns": "^2.22.1",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "filereader": "^0.10.3",
     "graphql": "^15.5.0",
     "graphql-type-json": "^0.3.2",
