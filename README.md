@@ -1,22 +1,20 @@
-# Ipsum
+# Start server locally
 
-## Getting Started
+## First time
 
-To start your Phoenix server:
+- npm install
 
-- Install dependencies with `mix deps.get`
-- Create and migrate your database with `mix ecto.setup`
-- Install Node.js dependencies with `cd assets && npm install`
-- Start Phoenix endpoint with `mix phx.server`
+## Develop on backend server
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+On one terminal, run below to watch and build the changes live
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+- npm run build:local
 
-## Learn more
+On another terminal, run below to start the server
 
-- Official website: https://www.phoenixframework.org/
-- Guides: https://hexdocs.pm/phoenix/overview.html
-- Docs: https://hexdocs.pm/phoenix
-- Forum: https://elixirforum.com/c/phoenix-forum
-- Source: https://github.com/phoenixframework/phoenix
+- npm run start
+
+## Start backend server
+
+- npm run build
+- npm run start
