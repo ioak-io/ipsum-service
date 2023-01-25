@@ -8,7 +8,6 @@ import { hashPassword, comparePassword } from '../../lib/authutils'
 
 import { getCollection } from "../../lib/dbutils";
 import { userCollection, userSchema } from "../user/model";
-import { memberCollection, memberSchema } from "../member/model";
 
 const selfRealm = 100;
 const appUrl = process.env.APP_URL || "http://localhost:3010";
@@ -86,25 +85,3 @@ export const decodeAppToken = async (token: string) => {
     return { outcome: false, err };
   }
 };
-
-export const changepassword = async (userId: String, code: string) => {
-  const model = getCollection(memberCollection, memberSchema);
-  return await model.findByIdAndUpdate(
-    userId, { code: await hashPassword(code) },
-    { new: true, upsert: true }
-  );
-}
-
-export const migrateHash = async () => {
-  const model = getCollection(memberCollection, memberSchema);
-  const list = await model.find();
-  for (let i = 0; i < list.length; i++) {
-    const item = list[i];
-    console.log(item._id, item.code)
-    await model.findByIdAndUpdate(
-      item._id, { code: await hashPassword(item.code || '123') },
-      { new: true, upsert: true }
-    );
-  }
-  return;
-}
