@@ -1,8 +1,8 @@
 version: "3.4"
 
 services:
-  ioaksiteserver:
-    image: ioaksiteserver
+  ipsumserver:
+    image: ipsumserver
     build:
       context: .
       dockerfile: ./Dockerfile

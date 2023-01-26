@@ -22,17 +22,17 @@ export const processFileUpload = async (
     useSSL: minioUrl !== "localhost",
   });
   await minioClient.removeObject(
-    "ioaksite",
+    "ipsum",
     `${dir}/${filename}`
   );
   const out = await minioClient.putObject(
-    "ioaksite",
+    "ipsum",
     `${dir}/${filename}`,
     file.buffer
   );
 
   const from = format(new Date(), 'yyyyMMdd-HHmmss');
-  const fileUrl = `${minioUrl === "localhost" ? "http" : "https"}://${minioUrl}:${minioPort}/ioaksite/${dir}/${filename}?from=${from}`;
+  const fileUrl = `${minioUrl === "localhost" ? "http" : "https"}://${minioUrl}:${minioPort}/ipsum/${dir}/${filename}?from=${from}`;
   return fileUrl;
 };
 
@@ -69,7 +69,7 @@ export const processFileUploadBkp = async (
     useSSL: true,
   });
   const out = await minioClient.putObject(
-    "ioaksite",
+    "ipsum",
     `${dir}/${file}.png`,
     base64ToBuffer(base64),
     undefined,
@@ -77,7 +77,7 @@ export const processFileUploadBkp = async (
       "Content-Type": "image/png",
     }
   );
-  const fileUrl = `https://api.ioak.io:8090/ioaksite/${dir}/${file}.png`;
+  const fileUrl = `https://api.ioak.io:8090/ipsum/${dir}/${file}.png`;
   return fileUrl;
 };
 

@@ -1,9 +1,9 @@
 version: "3.4"
 
 services:
-  ioaksiteservice:
-    image: ioaksiteservice
-    container_name: ioaksiteservice
+  ipsumservice:
+    image: ipsumservice
+    container_name: ipsumservice
     restart: always
     build:
       context: .
@@ -21,7 +21,7 @@ services:
     networks:
       ioak-net:
         aliases:
-          - ioaksiteservice.docker
+          - ipsumservice.docker
 
 networks:
   ioak-net:
