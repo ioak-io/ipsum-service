@@ -11,13 +11,9 @@ services:
     environment:
       NODE_ENV: production
       MONGODB_URI: mongodb://mongo.docker:27017
-      MINIO_URL: api.ioak.io
-      MINIO_PORT: 8090
-      MINIO_ACCESS_KEY: a2BSMeluIRysoTT6
-      MINIO_SECRET: WoCjAVV0O4D8AzL3MWYmo2oR3NVWvora
-      PORT: 8035
+      PORT: 8055
     ports:
-      - 8035:8035
+      - 8055:8055
     networks:
       ioak-net:
         aliases:
