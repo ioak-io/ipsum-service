@@ -4,7 +4,6 @@ export const getCollection = (
   collection: any,
   schema: any
 ): any => {
-  // const db = mongoose.connection.useDb(`oa${realm}`);
   const db = mongoose.connection.useDb(`ipsum`);
   return db.model(collection, schema);
 };

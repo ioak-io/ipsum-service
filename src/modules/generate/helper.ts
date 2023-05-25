@@ -1,5 +1,39 @@
+import { capitalize } from 'lodash';
 import * as corpusLorem from './corpus_lorem';
 import * as corpusExpanded from './corpus_expanded';
+import * as PresetHelper from '../preset/helper';
+
+export const generateTextForPreset = async (
+  presetId: string,
+  type: string,
+  count: number,
+  batchSize: number
+) => {
+
+  const preset = await PresetHelper.getPresetById(presetId);
+
+  const data: string[] = preset.corpusDecoded;
+
+  const response: string[][] = [];
+  if (type.toLowerCase() === "paragraph") {
+    for (let j = 0; j < batchSize; j++) {
+      let _texts: string[] = [];
+      for (let i = 0; i < count; i++) {
+        _texts.push(_getParagraph(preset.type, data, data.length));
+      }
+      response.push(_texts);
+    }
+  } else {
+    for (let j = 0; j < batchSize; j++) {
+      let _texts: string[] = [];
+      for (let i = 0; i < count; i++) {
+        _texts.push(_getSentence(preset.type, data, data.length));
+      }
+      response.push(_texts);
+    }
+  }
+  return response;
+};
 
 export const generateText = async (
   language: "english",
@@ -16,7 +50,7 @@ export const generateText = async (
     for (let j = 0; j < batchSize; j++) {
       let _texts: string[] = [];
       for (let i = 0; i < count; i++) {
-        _texts.push(_getParagraph(data, data.length));
+        _texts.push(_getParagraph('Word', data, data.length));
       }
       response.push(_texts);
     }
@@ -24,7 +58,7 @@ export const generateText = async (
     for (let j = 0; j < batchSize; j++) {
       let _texts: string[] = [];
       for (let i = 0; i < count; i++) {
-        _texts.push(_getSentence(data, data.length));
+        _texts.push(_getSentence('Word', data, data.length));
       }
       response.push(_texts);
     }
@@ -36,22 +70,26 @@ const _getWord = (data: string[], size: number): string => {
   return data[Math.floor(Math.random() * size)];
 }
 
-const _getSentence = (data: string[], size: number): string => {
+const _getSentence = (inputUnit: 'Word' | 'Sentence', data: string[], size: number): string => {
+  if (inputUnit === 'Sentence') {
+    return data[Math.floor(Math.random() * size)] + ".";
+  }
+
   let response = "";
   const count = _getRandomInt(7, 15);
   for (let i = 0; i < count; i++) {
     if (i > 0) response += " ";
     response += _getWord(data, size);
   }
-  return response;
+  return capitalize(response + ".");
 }
 
-const _getParagraph = (data: string[], size: number): string => {
+const _getParagraph = (inputUnit: 'Word' | 'Sentence', data: string[], size: number): string => {
   let response = "";
   const count = _getRandomInt(3, 10);
   for (let i = 0; i < count; i++) {
-    if (i > 0) response += ". ";
-    response += _getSentence(data, size);
+    if (i > 0) response += " ";
+    response += _getSentence(inputUnit, data, size);
   }
   return response;
 }
@@ -63,7 +101,6 @@ function _getRandomInt(min: number, max: number) {
 }
 
 export const findUniqueWords = (payload: string) => {
-  console.log(payload);
   const _payload = payload
     .replace(/[0123456789`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '')
     .replace(/\s\s+/g, ' ')

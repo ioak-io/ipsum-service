@@ -33,18 +33,30 @@ export const authorizeApiOneauth = async (req: any, res: any, next: any) => {
   }
 };
 
+
 export const authorizeApi = async (req: any, res: any, next: any) => {
   try {
     const token = req.headers["authorization"];
     if (!token) {
       return res.sendStatus(401);
     }
-    const localData = await decodeAppToken(token);
-    if (!localData.outcome) {
+    // const localData = await decodeAppToken(token);
+    // if (!localData.outcome) {
+    //   return res.sendStatus(401);
+    // }
+    // const localClaims: any = localData.claims;
+    // const space = localClaims.space;
+    // const companyId = localClaims.companyId;
+    console.log(token);
+    const data: any = await decodeToken(token);
+    console.log(data);
+    if (
+      !data.outcome ||
+      (req.params.space && (!data.claims?.permissions || !data.claims?.permissions['COMPANY_ADMIN']?.includes(req.params.space)))
+    ) {
       return res.sendStatus(401);
     }
-    const localClaims: any = localData.claims;
-    req.user = localClaims;
+    req.user = data.claims;
     next();
   } catch (err) {
     console.log(err);
@@ -52,24 +64,26 @@ export const authorizeApi = async (req: any, res: any, next: any) => {
   }
 };
 
-
 export const authorizeApiRead = async (req: any, res: any, next: any) => {
   try {
     const token = req.headers["authorization"];
     if (!token) {
       next();
-    } else {
-      const localData = await decodeAppToken(token);
-      if (!localData.outcome) {
-        next();
-      } else {
-        const localClaims: any = localData.claims;
-        req.user = localClaims;
-        next();
-      }
+      return;
     }
-  } catch (err) {
-    console.log(err);
+    const data: any = await decodeToken(token);
+    if (
+      !data.outcome ||
+      (req.params.space && (!data.claims?.permissions || !data.claims?.permissions['COMPANY_ADMIN']?.includes(req.params.space)))
+    ) {
+      next();
+      return;
+    }
+    req.user = data.claims;
     next();
+  } catch (err) {
+    console.log("___________")
+    next();
+    return;
   }
 };
