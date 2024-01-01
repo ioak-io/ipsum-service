@@ -17,8 +17,6 @@ const userSchema = require("./modules/user");
 const databaseUri = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017";
 
 mongoose.connect(databaseUri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
 });
 mongoose.pluralize(undefined);
 
@@ -35,7 +33,7 @@ const server = new ApolloServer({
   playground: true,
 });
 
-server.applyMiddleware({ app });
+server.start().then(() => server.applyMiddleware({ app }))
 
 app.use(cors());
 
@@ -55,8 +53,7 @@ app.use((_: any, res: any) => {
 
 app.listen({ port: process.env.PORT || 4000 }, () =>
   console.log(
-    `🚀 Server ready at http://localhost:${process.env.PORT || 4000}${
-      server.graphqlPath
+    `🚀 Server ready at http://localhost:${process.env.PORT || 4000}${server.graphqlPath
     }`
   )
 );

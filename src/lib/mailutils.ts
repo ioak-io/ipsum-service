@@ -70,7 +70,7 @@ const _sendMail = (
     name: smtpDefaultSenderName,
     address: smtpDefaultSenderEmail,
   };
-  transporter.sendMail({ ...message, from }, (err, info) => {
+  transporter.sendMail({ ...message, from }, (err: any, info: any) => {
     console.log(err);
   });
 };

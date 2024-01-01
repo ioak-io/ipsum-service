@@ -11,6 +11,8 @@ services:
     environment:
       NODE_ENV: production
       MONGODB_URI: mongodb://mongo.docker:27017
+      ONEAUTH_API: https://api.ioak.io:8010/api
+      ONEAUTH_API_KEY: 3a123ef3-417e-4b11-b808-1d574f8c6ce6
       PORT: 8055
     ports:
       - 8055:8055
