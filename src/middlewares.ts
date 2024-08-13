@@ -47,9 +47,7 @@ export const authorizeApi = async (req: any, res: any, next: any) => {
     // const localClaims: any = localData.claims;
     // const space = localClaims.space;
     // const companyId = localClaims.companyId;
-    console.log(token);
     const data: any = await decodeToken(token);
-    console.log(data);
     if (
       !data.outcome ||
       (req.params.space && (!data.claims?.permissions || !data.claims?.permissions['COMPANY_ADMIN']?.includes(req.params.space)))

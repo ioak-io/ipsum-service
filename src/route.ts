@@ -10,6 +10,5 @@ require("./modules/hello/route")(router);
 require("./modules/generate/route")(router);
 require("./modules/preset/route")(router);
 require("./modules/auth/route")(router);
-require("./modules/generate-paragraph/route")(router);
 
 module.exports = router;

@@ -70,8 +70,8 @@ const _getWord = (data: string[], size: number): string => {
   return data[Math.floor(Math.random() * size)];
 }
 
-const _getSentence = (inputUnit: 'Word' | 'Sentence', data: string[], size: number): string => {
-  if (inputUnit === 'Sentence') {
+const _getSentence = (inputUnit: 'Word' | 'Sentence' | 'AI', data: string[], size: number): string => {
+  if (inputUnit === 'AI' || 'Sentence') {
     return data[Math.floor(Math.random() * size)] + ".";
   }
 
@@ -84,7 +84,7 @@ const _getSentence = (inputUnit: 'Word' | 'Sentence', data: string[], size: numb
   return capitalize(response + ".");
 }
 
-const _getParagraph = (inputUnit: 'Word' | 'Sentence', data: string[], size: number): string => {
+const _getParagraph = (inputUnit: 'Word' | 'Sentence' | 'AI', data: string[], size: number): string => {
   let response = "";
   const count = _getRandomInt(3, 10);
   for (let i = 0; i < count; i++) {
