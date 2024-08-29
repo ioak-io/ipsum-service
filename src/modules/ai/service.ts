@@ -46,7 +46,8 @@ export const generate = async (text: string) => {
 
       if (responseData.choices && responseData.choices.length > 0) {
         const content = responseData.choices[0].message.content;
-        return content;
+        const sentencesArray = content.split('.').map((sentence: string) => sentence.trim()).filter((sentence: string) => sentence.length > 0);
+        return sentencesArray;
       }
     }
   } catch (error) {
