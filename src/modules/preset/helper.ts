@@ -103,9 +103,12 @@ export const deletePreset = async (_id: string) => {
 const findSentencesUsingAi = async (corpus: string) => {
   let items: string[] = [];
   let numberOfAiCalls = 0;
+  console.log("**");
   while (numberOfAiCalls < 8 && items.length < AI_GENERATED_SENTENCE_COUNT) {
+    console.log(`start - ${numberOfAiCalls}`);
     const batchOutput = await AiService.generate(corpus);
-    items = items.concat(findUniqueSetences(batchOutput));
+    items = items.concat(batchOutput);
+    console.log(`finish - ${numberOfAiCalls}`);
     numberOfAiCalls++;
   }
   console.log(`Corpus generated in ${numberOfAiCalls} number of AI calls`);
